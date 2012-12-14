@@ -1,22 +1,23 @@
+import java.util.ArrayList;
 
 public class locationCells {
-	int[] locationCells =  {0,0,0} ;
-	int numOfHits = 0;
-	public void setLocationCells (int[] locations){ 
-		 locationCells = locations;		//注意赋值过程（变量顺序）
+	private ArrayList<Integer> locationArr = new ArrayList<Integer>();
+	public void setLocationCells (int[] loc){
+		for (int x = 0; x < loc.length; x++){
+			locationArr.add(loc[x]);
+		}
 	}
-	public String checking(String checkStringNum) {
+	public String checking(String checkStringNum) {  //判断
 		int checkIntNum = Integer.parseInt(checkStringNum);
 		String result = "偏了";
-		for (int cell : locationCells){
-			if (checkIntNum == cell) {
+		int i = locationArr.indexOf(checkIntNum);
+		if ( i >= 0){
+			locationArr.remove(i);
+			if (locationArr.isEmpty()){
+				result = "消灭！";
+			}else{
 				result = "打中了！";
-				numOfHits++;
-				break;
 			}
-			}
-		if (numOfHits == locationCells.length){
-			result = "消灭！";
 		}
 		System.out.println(result);
 		return result;
